@@ -1,0 +1,155 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+
+<path>SBGP_Hangar_Big.ac</path>
+ 
+ <animation>
+  <type>range</type>
+  <min-m>0</min-m>
+  <max-m>5000</max-m>
+ </animation>
+ 
+ <animation>
+  <type>range</type>
+  <object-name>DoorSupport</object-name>
+  <min-m>0</min-m>
+  <max-m>1000</max-m>
+ </animation>
+ 
+ <animation>
+  <type>range</type>
+  <object-name>Light.1</object-name>
+  <min-m>0</min-m>
+  <max-m>1000</max-m>
+ </animation>
+ 
+ <animation>
+  <type>range</type>
+  <object-name>Label</object-name>
+  <min-m>0</min-m>
+  <max-m>300</max-m>
+ </animation>
+ 
+ <animation>
+		<type>material</type>
+		<object-name>lightcone</object-name>
+		<transparency>
+			<alpha-prop>environment/visibility-m</alpha-prop>
+			<factor>1</factor>
+			<offset>0</offset>
+			</transparency>
+		<threshold>0.001</threshold>
+	</animation>
+
+  <animation>
+    <type>select</type>
+    <object-name>lightcone</object-name>
+    <object-name>groundlight</object-name>
+    <enable-hot type="bool">false</enable-hot>
+    <condition>
+        <greater-than>
+          <property>/sim/time/sun-angle-rad</property>
+          <value>1.57</value>
+        </greater-than>
+    </condition>
+  </animation> 
+  
+ <nasal>
+  <load>
+   if (!contains(globals, "scenery")) globals["scenery"] = {};
+   if (!contains(scenery, "SBGP")) scenery["SBGP"] = {};
+   if (!contains(scenery.SBGP, "Hangar_Big")) scenery.SBGP["Hangar_Big"] = [nil];
+   scenery.SBGP.Hangar_Big[0] =
+     { door :
+       [aircraft.door.new("/scenery/SBGP/Hangar_Big[0]/door[0]", 5),
+		aircraft.door.new("/scenery/SBGP/Hangar_Big[0]/door[1]", 5)
+       ]
+     };
+  </load>
+ </nasal>
+
+<animation>
+ <type>pick</type>
+ <object-name>DoorInnerLeft</object-name>
+ <object-name>DoorInnerRight</object-name>
+ <object-name>DoorOuterLeft</object-name>
+<object-name>DoorOuterRight</object-name>
+ <visible>true</visible>
+ <action>
+  <name>click</name>
+  <button>0</button>
+  <repeatable>false</repeatable>
+  <binding>
+   <command>nasal</command>
+   <script>scenery.SBGP.Hangar_Big[0].door[0].toggle();</script>
+  </binding>
+ </action>
+</animation>
+
+<animation>
+ <type>translate</type>
+ <object-name>DoorInnerLeft</object-name>
+ <property>/scenery/SBGP/Hangar_Big[0]/door[0]/position-norm</property>
+ <factor>22</factor>
+ <axis>
+  <x>-0.45</x>
+  <y>0.0</y>
+  <z>-0.0</z>
+ </axis>
+</animation>
+
+<animation>
+ <type>translate</type>
+ <object-name>DoorInnerRight</object-name>
+ <property>/scenery/SBGP/Hangar_Big[0]/door[0]/position-norm</property>
+ <factor>22</factor>
+ <axis>
+  <x>0.45</x>
+  <y>0.0</y>
+  <z>-0.0</z>
+ </axis>
+</animation>
+
+<!--animation>
+ <type>pick</type>
+<object-name>DoorOuterLeft</object-name>
+<object-name>DoorOuterRight</object-name>
+ <visible>true</visible>
+ <action>
+  <name>click</name>
+  <button>0</button>
+  <repeatable>false</repeatable>
+  <binding>
+   <command>nasal</command>
+   <script>scenery.SBGP.Hangar_Big[0].door[1].toggle();</script>
+  </binding>
+ </action>
+</animation-->
+
+<animation>
+ <type>translate</type>
+ <object-name>DoorOuterLeft</object-name>
+ <property>/scenery/SBGP/Hangar_Big[0]/door[0]/position-norm</property>
+ <factor>15</factor>
+ <axis>
+  <x>-0.45</x>
+  <y>0.0</y>
+  <z>-0.0</z>
+ </axis>
+</animation>
+
+<animation>
+ <type>translate</type>
+ <object-name>DoorOuterRight</object-name>
+ <property>/scenery/SBGP/Hangar_Big[0]/door[0]/position-norm</property>
+ <factor>15</factor>
+ <axis>
+  <x>0.45</x>
+  <y>0.0</y>
+  <z>0.0</z>
+ </axis>
+</animation>
+
+</PropertyList>
+ 
